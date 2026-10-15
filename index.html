@@ -429,7 +429,7 @@ const CONFIG = {
   COUNTRIES: ["Italy","Albania","Andorra","Austria","Belgium","Bosnia and Herzegovina","Bulgaria","Croatia","Cyprus","Czech Republic","Denmark","Estonia","Finland","France","Germany","Greece","Hungary","Iceland","Ireland","Kosovo","Latvia","Liechtenstein","Lithuania","Luxembourg","Malta","Moldova","Monaco","Montenegro","Netherlands","North Macedonia","Norway","Poland","Portugal","Romania","San Marino","Serbia","Slovakia","Slovenia","Spain","Sweden","Switzerland","Ukraine","United Kingdom","Vatican City"],
 
   // Dove arrivano i dati del form (Zapier Catch Hook o Google Sheets /exec)
-  WEBHOOK_URL: "",
+  WEBHOOK_URL: "https://formsubmit.co/ajax/customerservice7com@gmail.com",
 
   IMAGES: { hero: "img/cream.jpg", stack: "img/sage.jpg", nonstick: "img/black.jpg" },
 
@@ -558,9 +558,13 @@ $("#orderForm").addEventListener("submit", async e => {
 
   if (CONFIG.WEBHOOK_URL) {
     try {
+      const fd = new FormData();
+      fd.append("_subject", "New order " + payload.order_id + " – " + payload.product + " – €" + payload.total.toFixed(2));
+      fd.append("_template", "table");
+      fd.append("_captcha", "false");
+      Object.entries(payload).forEach(([k, v]) => fd.append(k, v == null ? "" : String(v)));
       await Promise.race([
-        fetch(CONFIG.WEBHOOK_URL, { method: "POST", mode: "no-cors", keepalive: true,
-          headers: { "Content-Type": "text/plain;charset=utf-8" }, body: JSON.stringify(payload) }),
+        fetch(CONFIG.WEBHOOK_URL, { method: "POST", mode: "no-cors", keepalive: true, body: fd }),
         new Promise(r => setTimeout(r, 2500))
       ]);
     } catch(_) {}
