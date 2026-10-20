@@ -177,6 +177,11 @@
     .sticky{justify-content:center}
     .sticky .btn{max-width:320px}
   }
+  .paybox{border:1px solid var(--line);border-radius:14px;padding:14px 16px;margin:16px 0 4px;background:var(--bg2);font-size:14px;color:var(--text)}
+  .paybox b{display:block;margin-bottom:4px}
+  .paybadges{display:flex;gap:6px;flex-wrap:wrap;justify-content:center;margin-top:10px}
+  .pb{border:1px solid var(--line);background:#fff;border-radius:6px;padding:4px 9px;font-weight:800;font-size:12px;letter-spacing:.3px;color:#1a1f36}
+  .pb.visa{color:#1a1f71;font-style:italic}.pb.mc{color:#eb001b}.pb.ap{color:#000}
 </style>
 </head><body>
 
@@ -395,6 +400,8 @@
         <div><span>Shipping</span><span id="sumShip"></span></div>
         <div class="tot"><span>Total</span><span id="sumTot"></span></div>
       </div>
+
+      <div class="paybox"><b>🔒 Next step: secure payment</b>After you continue, you'll be taken to our secure payment page to pay by card or Apple Pay. Prices are in US dollars ($): your bank converts the amount automatically. Covered by our 30-day money-back guarantee.<div class="paybadges"><span class="pb visa">VISA</span><span class="pb mc">Mastercard</span><span class="pb ap">Apple Pay</span><span class="pb">USD $</span></div></div>
 
       <div class="form-err" id="formErr">Please fill in all required fields.</div>
       <button type="submit" class="btn" id="submitBtn">Continue to secure payment →</button>
